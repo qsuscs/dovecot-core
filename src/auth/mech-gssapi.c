@@ -151,6 +151,10 @@ obtain_service_credentials(struct auth_request *request, gss_cred_id_t *ret_r)
 		/* The standard POP3 service name with GSSAPI is called
 		   just "pop". */
 		service_name = "pop";
+	} else if (strcasecmp(request->fields.service, "submission") == 0) {
+		/* The "submission" service is really SMTP, even though the
+                   service name for port 587 is "submission". */
+		service_name = "smtp";
 	} else {
 		service_name = t_str_lcase(request->fields.service);
 	}
